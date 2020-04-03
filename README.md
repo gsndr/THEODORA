@@ -47,7 +47,7 @@ Global variables are stored in __MINDFUL.conf__  file
     VALIDATION_SPLIT #the percentage of validation set used to train models
     CHANGE_CLASS_SVC = 1 #if set to 1 the boundary re-positiong is performed
     LOAD_SVC = 1 #if 1 the SVM model for decision boundary is load
-     THRESHOLD = 0.70 #threshodl for change of normal class
+    THRESHOLD = 0.70 #threshodl for change of normal class
 ```
 
 ## Download datasets
