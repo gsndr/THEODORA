@@ -205,7 +205,7 @@ class Run():
             for i in drmeanList:
                 r_mean.append(i)
 
-            dfResults = pd.DataFrame([r], columns=columns)
+            dfResults = pd.DataFrame([r_mean], columns=columns)
             print(dfResults)
 
 
