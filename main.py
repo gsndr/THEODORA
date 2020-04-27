@@ -4,7 +4,7 @@ import numpy as np
 
 np.random.seed(12)
 import tensorflow
-tensorflow.set_random_seed(12)
+tensorflow.random.set_seed(12)
 import Model
 
 
