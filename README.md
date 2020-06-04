@@ -2,6 +2,16 @@
 
 The repository contains code refered to the work:
 
+_Giuseppina Andresini, Annalisa Appice, Francesco Paolo Caforio,  Donato Malerba_
+
+[Improving Cyber-Threat Detection by Movingthe Boundary around the Normal Samples]() 
+
+Please cite our work if you find it useful for your research and work.
+```
+  @ARTICLE{}
+```
+
+
 
 
 ## Code requirements
