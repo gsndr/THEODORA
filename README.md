@@ -8,7 +8,25 @@ _Giuseppina Andresini, Annalisa Appice, Francesco Paolo Caforio,  Donato Malerba
 
 Please cite our work if you find it useful for your research and work.
 ```
-  @ARTICLE{}
+  @Inbook{Andresini2021,
+author="Andresini, Giuseppina
+and Appice, Annalisa
+and Paolo Caforio, Francesco
+and Malerba, Donato",
+editor="Maleh, Yassine
+and Shojafar, Mohammad
+and Alazab, Mamoun
+and Baddi, Youssef",
+title="Improving Cyber-Threat Detection by Moving the Boundary Around the Normal Samples",
+bookTitle="Machine Intelligence and Big Data Analytics for Cybersecurity Applications",
+year="2021",
+publisher="Springer International Publishing",
+address="Cham",
+pages="105--127",
+doi="10.1007/978-3-030-57024-8_5",
+url="https://doi.org/10.1007/978-3-030-57024-8_5"
+}
+
 ```
 
 
