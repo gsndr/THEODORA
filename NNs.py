@@ -37,7 +37,7 @@ class Models():
         decoded = Dense(n_col, activation=params['last_activation'], kernel_initializer=params['kernel_initializer'],
                         name='decoder1')(decoded)
 
-        autoencoder = Model(inputs=inputLayer, output=decoded)
+        autoencoder = Model(inputs=inputLayer, outputs=decoded)
         autoencoder.summary
         learning_rate = 0.001
         decay = learning_rate / params['epochs']
