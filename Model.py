@@ -52,27 +52,38 @@ class Run():
 
         # contains path of dataset and model and preprocessing phases
         ds = Datasets(dsConf)
-        ds.preprocessing1()
-        if(self.dataset=='CICIDS2017'):
-            train, test = ds.getTrain_TestCIDIS()
-        else:
-            train, test = ds.getTrain_Test()
-        prp = prep(train, test)
-
-        # Preprocessing phase from original to numerical dataset
+        clsT = dsConf.get('label')
         PREPROCESSING1 = int(configuration.get('PREPROCESSING1'))
         if (PREPROCESSING1 == 1):
+
+            ds.preprocessing1()
+
+            if(self.dataset=='CICIDS2017'):
+                train, test = ds.getTrain_TestCIDIS()
+            else:
+                train, test = ds.getTrain_Test()
+            prp = prep(train, test,clsT)
+
+        # Preprocessing phase from original to numerical dataset
+        PREPROCESSING2 = int(configuration.get('PREPROCESSING2'))
+        if (PREPROCESSING2 == 1):
 
             train, test = ds.preprocessing2(prp)
         else:
             train, test = ds.getNumericDatasets()
 
+        print(train.shape)
+
+        prp = prep(train, test,clsT)
         clsT, clsTest = prp.getCls()
+        print(clsT)
 
         if (self.dataset == 'CICIDS2017'):
             train_X, train_Y, test_X, test_Y = prp.getXYCICIDS(train, test)
         else:
             train_X, train_Y, test_X, test_Y = prp.getXY(train, test)
+
+
 
 
 
@@ -119,9 +130,11 @@ class Run():
 
             print('Number of elements in cluster0 (attack): ', cluster0)
             print('Number of elements in cluster1 (normal): ', cluster1)
+            print(train_Y)
 
 
-            true_Y = train_Y[clsT].tolist()
+            #true_Y = train_Y[clsT].tolist()
+            true_Y = train_Y.tolist()
             cf=confusion_matrix(true_Y, pred)
 
 
@@ -132,19 +145,22 @@ class Run():
 
             purity = (1 / (len(true_Y)) * (cf[0][0] + cf[1][1]))
             print('Purity Index: ', purity)
-
-            df_svc = train_Y.copy()
+            df_svc=pd.DataFrame()
+            df_svc[clsT] = train_Y.copy()
             df_svc['Prob1'] = prob1
 
 
 
 
-            print(collections.Counter(train_Y[clsT]))
+
+            print(collections.Counter(train_Y))
 
 
             threshold = float(configuration.get('THRESHOLD'))
 
-            df_selected= df_svc.loc[(df_svc[clsT]  == 1) & (df_svc["Prob1"] >= 0.50) & (df_svc["Prob1"] <= threshold)]
+            #df_selected= df_svc.loc[(df_svc[clsT]  == 1) & (df_svc["Prob1"] >= 0.50) & (df_svc["Prob1"] <= threshold)]
+            print(df_svc)
+            df_selected = df_svc.loc[(df_svc[clsT] == 1) & (df_svc["Prob1"] >= 0.50) & (df_svc["Prob1"] <= threshold)]
             df_svc.loc[df_selected.index, clsT] = 0
 
             print('#LabelChanged: ', df_selected.shape[0])
@@ -178,7 +194,7 @@ class Run():
 
 
 
-        '''Predition'''
+        '''Prediction'''
         if (self.dataset == 'CICIDS2017'):
             r_list = []
             i = 0

@@ -29,6 +29,7 @@ class Datasets():
 
 
 
+
     def getTrain_Test(self):
         return self._train, self._test
 
@@ -141,7 +142,7 @@ class Datasets():
     def getAutoencoder_Normal(self, train_XN, N_CLASSES):
 
         m = Models(N_CLASSES)
-        if ((self._testpath == 'KDDCUP') or (self._testpath == 'KDDTest-21')):
+        if ((self._testpath == 'KDDCUP') or (self._testpath == 'KDDTest+')):
 
             p = {
                 'first_layer': 40,
@@ -220,7 +221,7 @@ class Datasets():
 
                    """
         m = Models(N_CLASSES)
-        if ((self._testpath == 'KDDCUP') or (self._testpath == 'KDDTest-21')):
+        if ((self._testpath == 'KDDCUP')):
 
             p = {
                 'first_layer': 40,
@@ -281,6 +282,21 @@ class Datasets():
                 'first_activation': 'relu',
                 'last_activation': 'linear'}
             model = m.autoencoder(train_XN, p)
+        elif (self._testpath == 'KDDTest+'):
+            p = {
+                'first_layer': 50,
+                'second_layer': 10,
+                'batch_size': 32,
+                'epochs': 150,
+                'optimizer': Adam,
+                'dropout_rate': 0.0117,
+                'kernel_initializer': 'glorot_uniform',
+                'losses': 'mse',
+                'lr': 0.00947,
+                'first_activation': 'relu',
+                'last_activation': 'linear'}
+            model = m.autoencoder(train_XN, p)
+
         
         return model, p
 
@@ -312,7 +328,7 @@ class Datasets():
     def getMINDFUL(self, train, N_CLASSES):
 
         m = Models(N_CLASSES)
-        if ((self._testpath == 'KDDCUP') or (self._testpath == 'KDDTest-21')):
+        if ((self._testpath == 'KDDCUP')):
             p = {
                 'filter': 64,
                 'num_unit': 320,
@@ -384,6 +400,24 @@ class Datasets():
             }
             
             model = m.MINDFUL(train, p)
+
+        elif (self._testpath == 'KDDTest+'):
+            p = {
+                'filter': 64,
+                'num_unit': 320,
+                'num_unit1': 160,
+                'activation': 'relu',
+                'dropout_rate1': 0.1602501347478713,
+                'dropout_rate2':  0.11729755246044238,
+                'dropout_rate3': 0.8444244099007299,
+                'batch_size': 64,
+                'epochs': 150,
+                'optimizer': Adam,
+                'lr':  0.0003581900508076567,
+                'kernel_initializer': 'glorot_uniform',
+                'losses': 'categorical_crossentropy'}
+            model = m.MINDFUL(train, p)
+
         return model, p
 
 
