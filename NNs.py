@@ -20,10 +20,10 @@ class Models():
 
     def autoencoder(self, x_train, params):
         n_col = x_train.shape[1]
-        input = Input(shape=(n_col,))
+        inputLayer = Input(shape=(n_col,))
         encoded = Dense(params['first_layer'], activation=params['first_activation'],
                         kernel_initializer=params['kernel_initializer'],
-                        name='encoder2')(input)
+                        name='encoder2')(inputLayer)
 
         encoded = Dense(params['second_layer'], activation=params['first_activation'],
                         kernel_initializer=params['kernel_initializer'],
@@ -37,7 +37,7 @@ class Models():
         decoded = Dense(n_col, activation=params['last_activation'], kernel_initializer=params['kernel_initializer'],
                         name='decoder1')(decoded)
 
-        autoencoder = Model(input=input, output=decoded)
+        autoencoder = Model(input=inputLayer, output=decoded)
         autoencoder.summary
         learning_rate = 0.001
         decay = learning_rate / params['epochs']
